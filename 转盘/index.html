@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .pointer-container {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            background-color: antiquewhite;
+            border: 5px solid royalblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pointer {
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: relative;
+            transition: transform 10s cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+
+        .pointer::after {
+            content: '';
+            border-width: 20px 10px;
+            /* 三角形 */
+            border-style: solid;
+            border-color: transparent;
+            border-bottom-color: red;
+            transform: translateY(-100%);
+            position: absolute;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="handleStart()">点击开始</button>
+    <div class="container">
+        <div class="pointer-container">
+            <div class="pointer">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const pointerElement = document.querySelector('.pointer')
+    const rewardList = [45, 200, 300]
+    let rewardIndex = 0
+    let lastTotalDegree = 0
+
+    function handleStart() {
+        const lapDegree = 10 * 360 // 圈数
+        const targetDegree = rewardList[rewardIndex]
+        if (!targetDegree) {
+            return
+        }
+        rewardIndex++
+        // 接着上次，并从0开始，兼容多次抽奖
+        const offset = lastTotalDegree + (360 > lastTotalDegree ? -lastTotalDegree : -lastTotalDegree % 360)
+        // 本轮转动圈数角度 + 奖项角度 + 上轮归0后的角度
+        const totalDegree = lapDegree + targetDegree + offset
+        pointerElement.style.transform = `rotate(${totalDegree}deg)`
+        lastTotalDegree = totalDegree
+    }
+</script>
+
+</html>
