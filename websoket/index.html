@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat Demo</title>
+</head>
+<body>
+    <h1>WebSocket Chat Demo</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username">
+    <button onclick="connect()">Connect</button>
+    <div>
+        <h2>Group Chat</h2>
+        <div id="groupChat"></div>
+        <input type="text" id="groupMessage">
+        <button onclick="sendGroupMessage()">Send</button>
+    </div>
+    <div>
+        <h2>Private Chat</h2>
+        <label for="recipient">Recipient:</label>
+        <input type="text" id="recipient">
+        <div id="privateChat"></div>
+        <input type="text" id="privateMessage">
+        <button onclick="sendPrivateMessage()">Send</button>
+    </div>
+
+    <script>
+        let socket;
+        function connect() {
+            const username = document.getElementById('username').value;
+            socket = new WebSocket('ws://localhost:3000?username=' + username);
+            socket.onopen = function(event) {
+                console.log('WebSocket connection opened');
+            };
+            socket.onmessage = function(event) {
+                if (typeof event.data === 'string') {
+                    console.log('11', 11);
+                    const message = JSON.parse(event.data);
+                    handleMessage(message);
+                } else if (event.data instanceof Blob) {
+                    console.log('22', 22);
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        const message = JSON.parse(reader.result);
+                        handleMessage(message);
+                    };
+                    reader.readAsText(event.data);
+                }
+            };
+        }
+
+        function handleMessage(message) {
+            if (message.type === 'group') {
+                document.getElementById('groupChat').innerHTML += `<p>${message.sender}: ${message.text}</p>`;
+            } else if (message.type === 'private') {
+                document.getElementById('privateChat').innerHTML += `<p>${message.sender} (private): ${message.text}</p>`;
+            }
+        }
+
+        function sendGroupMessage() {
+            const username = document.getElementById('username').value;
+            const message = document.getElementById('groupMessage').value;
+            socket.send(JSON.stringify({ type: 'group', text: message, sender:username  }));
+            document.getElementById('groupChat').innerHTML += `<p>You: ${message}</p>`;
+        }
+
+        function sendPrivateMessage() {
+            const username = document.getElementById('username').value;
+            const recipient = document.getElementById('recipient').value;
+            const message = document.getElementById('privateMessage').value;
+            socket.send(JSON.stringify({ type: 'private', recipient: recipient, text: message, sender:username }));
+            document.getElementById('privateChat').innerHTML += `<p>You (private to ${recipient}): ${message}</p>`;
+        }
+    </script>
+</body>
+</html>
