@@ -10,11 +10,14 @@ export default defineNuxtConfig({
 			tailwindcss: {},
 		},
 	},
-	modules: ['@pinia/nuxt', 'nuxt-icons'],
+	modules: ['@pinia/nuxt'],
 	runtimeConfig: {
 		// public 命名空间中定义的，在服务器端和客户端都可以普遍访问
 		public: {
 			apiBase: process.env.NUXT_PUBLIC_API_BASE,
 		},
+	},
+	app: {
+		pageTransition: { name: 'page', mode: 'out-in' },
 	},
 })

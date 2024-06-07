@@ -1,6 +1,8 @@
 <template>
-	<div class="box">{{ store.name }}</div>
-	<AButton>按钮</AButton>
+	<div class="home-wrap">
+		{{ store.name }}
+		<AButton>按钮</AButton>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -11,4 +13,11 @@ await https({
 })
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.home-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
+}
+</style>
