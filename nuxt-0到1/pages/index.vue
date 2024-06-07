@@ -1,6 +1,5 @@
 <template>
-	<div class="box absolute">{{ store.name }}</div>
-	<NuxtIcon name="arrow-right" class="text-[100px]" />
+	<div class="box">{{ store.name }}</div>
 	<AButton>按钮</AButton>
 </template>
 
