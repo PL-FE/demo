@@ -1,0 +1,83 @@
+export type stockType = {
+	market: {
+		status_id: number
+		region: string
+		status: string
+		time_zone: string
+		time_zone_desc: string | null
+		delay_tag: number
+	}
+	quote: {
+		current_ext: number
+		symbol: string
+		volume_ext: number
+		high52w: number
+		delayed: number
+		type: number
+		tick_size: number
+		float_shares: number
+		limit_down: number
+		no_profit: string
+		high: number
+		float_market_capital: number
+		timestamp_ext: number
+		lot_size: number
+		lock_set: null
+		weighted_voting_rights: string
+		chg: number
+		eps: number
+		last_close: number
+		profit_four: number
+		volume: number
+		volume_ratio: number
+		profit_forecast: number
+		turnover_rate: number
+		low52w: number
+		name: string
+		exchange: string
+		pe_forecast: number
+		total_shares: number
+		status: number
+		is_vie_desc: string
+		security_status: null
+		code: string
+		goodwill_in_net_assets: number
+		avg_price: number
+		percent: number
+		weighted_voting_rights_desc: string
+		amplitude: number
+		current: number
+		is_vie: string
+		current_year_percent: number
+		issue_date: number
+		sub_type: string
+		low: number
+		is_registration_desc: string
+		no_profit_desc: string
+		market_capital: number
+		dividend: number
+		dividend_yield: number
+		currency: string
+		navps: number
+		profit: number
+		timestamp: number
+		pe_lyr: number
+		amount: number
+		pledge_ratio: number
+		traded_amount_ext: number
+		is_registration: string
+		pb: number
+		limit_up: number
+		pe_ttm: number
+		time: number
+		open: number
+	}
+	others: {
+		pankou_ratio: number
+		cyb_switch: boolean
+	}
+	tags: {
+		description: string
+		value: number
+	}[]
+}

@@ -9,6 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "@pinia/nuxt": "^0.5.1",
     "ant-design-vue": "^4.2.1",
     "nuxt": "^3.11.2",
@@ -19,6 +20,8 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.12.0",
     "@typescript-eslint/parser": "^7.12.0",
+    "@vueuse/core": "^10.10.0",
+    "@vueuse/nuxt": "^10.10.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.1.0",

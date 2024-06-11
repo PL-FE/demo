@@ -1,8 +1,16 @@
 <template>
 	<div>
-		<NuxtLayout>
-			<NuxtPage />
-		</NuxtLayout>
+		<a-config-provider
+			:theme="{
+				token: {
+					colorPrimary: '#003e6a',
+				},
+			}"
+		>
+			<NuxtLayout>
+				<NuxtPage />
+			</NuxtLayout>
+		</a-config-provider>
 	</div>
 </template>
 <style>
