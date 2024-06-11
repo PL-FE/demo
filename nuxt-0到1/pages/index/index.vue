@@ -1,5 +1,7 @@
 <template>
 	<div class="home-wrap">
+		{{ title }}
+		{{ data }}
 		<ACarousel autoplay>
 			<div v-for="it in imgList" :key="it.url">
 				<img :src="it.url" class="carousel-img" />
@@ -9,6 +11,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 const imgList = [
 	{
 		url: 'https://www.zhifeishengwu.com/skin/default/images/banner12.jpg',
@@ -25,9 +29,11 @@ const imgList = [
 ]
 // import { useStore } from '@/store/index'
 // const store = useStore()
-// await https({
-// 	url: 'xxx/getList',
-// })
+const title = ref('')
+useHttps({ url: '/api/hello' }).then(res => {
+	console.log('res', res)
+	title.value = res
+})
 </script>
 
 <style scoped lang="scss">

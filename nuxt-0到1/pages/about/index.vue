@@ -1,14 +1,31 @@
-<template>
-	<div class="about-wrap">about</div>
-</template>
+<script setup lang="ts">
+const list = useCookie('list22', {
+	default: () => [],
+	watch: 'shallow',
+})
 
-<script lang="ts" setup></script>
-
-<style scoped lang="scss">
-.about-wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 60vh;
+function add() {
+	list.value?.push(Math.round(Math.random() * 1000))
+	// list cookie不会随此更改而更新
 }
-</style>
+
+function save() {
+	if (list.value && list.value !== null) {
+		list.value = [...list.value]
+		// list cookie随此更改而更新
+	}
+}
+</script>
+
+<template>
+	<div>
+		<h1>列表</h1>
+		<pre>{{ list }}</pre>
+		<button @click="add">添加</button>
+		<br />
+		<br />
+		<br />
+		<br />
+		<button @click="save">保存</button>
+	</div>
+</template>

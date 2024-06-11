@@ -34,7 +34,7 @@ const replacePathVariables = (url: NitroFetchRequest, params: any = {}) => {
 	return formattedURL
 }
 
-export async function https({ url, opts, method = 'get', contentType = 'application/json' }: Params) {
+export default async function ({ url, opts, method = 'get', contentType = 'application/json' }: Params) {
 	const config = useRuntimeConfig()
 	const requestURL = replacePathVariables(url, opts)
 	const { data } = await useFetch(requestURL, {
